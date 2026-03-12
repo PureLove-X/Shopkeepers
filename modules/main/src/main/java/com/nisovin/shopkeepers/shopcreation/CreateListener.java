@@ -190,7 +190,7 @@ class CreateListener implements Listener {
 			return;
 		}
 
-		// Ignore if already cancelled. This resolves conflicts with other event handlers that also
+		// Ignore if already canceled. This resolves conflicts with other event handlers that also
 		// run at LOWEST priority, such as for example Shopkeeper's sign shop listener.
 		if (useItemInHand == Result.DENY) {
 			Log.debug("  Ignoring already cancelled item interaction");

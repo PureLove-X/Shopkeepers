@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
+import com.nisovin.shopkeepers.teams.TeamSystem;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -117,6 +118,8 @@ public class SKShopkeepersPlugin extends JavaPlugin implements InternalShopkeepe
 	private final SKUIRegistry uiRegistry = new SKUIRegistry();
 	private final SKDefaultUITypes defaultUITypes = new SKDefaultUITypes();
 
+	//Team System
+	private final TeamSystem teamSystem = new TeamSystem(Unsafe.initialized(this));
 	// Shopkeeper registry:
 	private final SKShopkeeperRegistry shopkeeperRegistry = new SKShopkeeperRegistry(
 			Unsafe.initialized(this)
@@ -444,6 +447,9 @@ public class SKShopkeepersPlugin extends JavaPlugin implements InternalShopkeepe
 
 		commandTrading.onEnable();
 
+		//Team System:
+		teamSystem.onEnable();
+
 		// Trade loggers:
 		tradeLoggers.onEnable();
 
@@ -518,6 +524,8 @@ public class SKShopkeepersPlugin extends JavaPlugin implements InternalShopkeepe
 		playerShops.onDisable();
 
 		commandTrading.onDisable();
+		//Team System:
+		teamSystem.onDisable();
 
 		// Trade loggers:
 		tradeLoggers.onDisable();
@@ -610,6 +618,10 @@ public class SKShopkeepersPlugin extends JavaPlugin implements InternalShopkeepe
 		return shopkeeperStorage;
 	}
 
+	//TEAM SYSTEM
+	public TeamSystem getTeamSystem() {
+		return teamSystem;
+	}
 	// ITEM UPDATES
 
 	@Override
