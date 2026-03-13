@@ -30,7 +30,7 @@ public final class UserArgumentUtils {
 	 * (potentially many) player files.
 	 * <p>
 	 * This may for example be used for command completion suggestions.
-	 * 
+	 *
 	 * @return the users known to the plugin that can be determined without loading player files
 	 */
 	public static Stream<User> getKnownUsers() {
@@ -70,7 +70,7 @@ public final class UserArgumentUtils {
 	 * - Names don't include color codes.
 	 * - Display names may include whitespace, color codes, arbitrary characters and might not be
 	 *   unique.
-	 * 
+	 *
 	 * However, user names are also retrieved from the shop owners stored in the save file. Since
 	 * the save data might have been manually edited, and since users can change their names without
 	 * the names of the previous owners having been updated yet, user names are not guaranteed to be
@@ -90,7 +90,7 @@ public final class UserArgumentUtils {
 
 		/**
 		 * Whether this {@link UserNameMatcher} matches display names.
-		 * 
+		 *
 		 * @return <code>true</code> if matching display names
 		 */
 		public boolean matchesDisplayNames();

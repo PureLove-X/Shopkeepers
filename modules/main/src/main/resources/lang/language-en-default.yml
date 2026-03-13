@@ -820,3 +820,50 @@ command-description-snapshot-remove: "Removes a specific or all snapshots of a s
 command-description-snapshot-restore: "Restores a specific shop snapshot."
 command-description-edit-villager: "Opens the editor for the target villager."
 command-description-replace-all-with-vanilla-villagers: "Replaces all shopkeepers with vanilla villagers without AI."
+
+#Team Messages:
+command-description-team: "Manages teams."
+command-description-team-create: "Creates a new team."
+command-description-team-invite: "Invite a player to your team."
+command-description-team-accept: "Accept a team invite."
+command-description-team-deny: "Deny a team invite."
+command-description-team-kick: "Kick a player from the team."
+command-description-team-leave: "Leave a team."
+command-description-team-info: "Show team information."
+command-description-team-transfer: "Transfer team ownership."
+command-description-team-list: "List all teams."
+
+team-created: "&aTeam '{name}' created."
+team-already-exists: "&cA team with that name already exists."
+already-in-team: "&cThat player is already in a team."
+team-name-required: "&cYou must specify a team name."
+
+team-invite-sent: "&aInvite sent to {player}."
+team-invite-received: "&e{player} invited you to join team {name}."
+team-invite-accepted: "&e{player} joined the team."
+team-invite-denied: "&e{player} declined your team invite."
+team-invite-already-sent: "&cThat player already has a pending invite."
+team-invite-expired: "&cThat invite has expired."
+no-pending-invite: "&cYou have no pending invite from that team."
+
+team-joined: "&aYou joined team {name}."
+team-left: "&cYou left the team."
+
+team-not-found: "&cTeam '{name}' not found."
+team-not-owner: "&cOnly the team owner can do that."
+team-not-in-team: "&cYou are not a member of that team."
+
+team-player-kicked: "&e{player} was kicked from the team."
+team-kicked: "&cYou were removed from the team."
+cannot-kick-owner: "&cYou cannot kick the team owner."
+team-player-not-found: "&cThat player is not in the team."
+
+team-ownership-transferred: "&aOwnership transferred to {player}."
+
+team-info-header: "&6Team: {name}"
+team-info-owner: "&eOwner: {owner}"
+team-info-members: "&eMembers: {members}"
+
+no-teams-exist: "&cNo teams exist."
+team-list-header: "&6Teams:"
+team-list-entry: "&e- {name}"

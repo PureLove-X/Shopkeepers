@@ -236,6 +236,22 @@ public interface ShopkeepersPlugin extends Plugin {
 	 */
 	public static final String PLAYER_BOOK_PERMISSION = "shopkeeper.player.book";
 
+	//Team Permissions
+	/**
+	 * The <code>shopkeeper.team</code> permission.
+	 * Allows creating and managing teams
+	 */
+	public static final String TEAM_PERMISSION = "shopkeeper.team";
+	/**
+	 * The <code>shopkeeper.team.join</code> permission.
+	 * Allows the ability to join teams (shopkeeper.team includes this by default)
+	 */
+	public static final String TEAM_JOIN_PERMISSION = "shopkeeper.team.join";
+	/**
+	 * The <code>shopkeeper.team.admin</code> permission.
+	 * Allows staff the ability to manage other peoples teams
+	 */
+	public static final String TEAM_ADMIN_PERMISSION = "shopkeeper.team.admin";
 	/**
 	 * Checks if the given player has the permission to create any kind of shopkeeper.
 	 * 

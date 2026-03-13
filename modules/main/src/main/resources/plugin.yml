@@ -14,7 +14,9 @@ commands:
         description: Base for all shopkeeper commands.
         aliases: [shopkeepers]
         usage: 'Unknown command! Try /<command> help'
-
+    team:
+        description: Team management
+        usage: 'Unknown command! Try /<command> help'
 permissions:
     # Command permissions:
     shopkeeper.help:
@@ -200,6 +202,13 @@ permissions:
         default: false
 
     # Star notation: Includes all other permissions
+    team.*:
+        description: All Team permissions
+        default: op
+        children:
+            shopkeeper.team: true
+            shopkeeper.team.join: true
+            shopkeeper.team.admin: true
     shopkeeper.*:
         description: Access to everything
         default: op
@@ -239,3 +248,6 @@ permissions:
             shopkeeper.sign: true
             shopkeeper.citizen: true
             shopkeeper.entity.*: true
+            shopkeeper.team: true
+            shopkeeper.team.join: true
+            shopkeeper.team.admin: true

@@ -57,10 +57,14 @@ public class TeamStorage {
 
             UUID owner = UUID.fromString(ownerString);
 
-            Team team = teamManager.createTeam(teamId, owner);
+            UUID teamUUID = UUID.fromString(teamId);
+            String name = teamSection.getString("name");
+
+            teamManager.loadTeam(teamUUID, name, owner);
 
             for (String member : teamSection.getStringList("members")) {
-                team.addMember(UUID.fromString(member));
+                UUID memberUUID = UUID.fromString(member);
+                teamManager.addMember(teamUUID, memberUUID);
             }
         }
     }
@@ -77,10 +81,10 @@ public class TeamStorage {
 
         for (Team team : teamManager.getTeams()) {
 
-            ConfigurationSection teamSection = teamsSection.createSection(team.getId());
+            ConfigurationSection teamSection = teamsSection.createSection(team.getId().toString());
 
             teamSection.set("owner", team.getOwner().toString());
-
+            teamSection.set("name", team.getName());
             teamSection.set("members", team.getMembers().stream()
                     .map(UUID::toString)
                     .toList());

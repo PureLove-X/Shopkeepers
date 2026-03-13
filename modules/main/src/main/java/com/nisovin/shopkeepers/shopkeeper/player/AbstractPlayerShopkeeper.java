@@ -135,6 +135,7 @@ public abstract class AbstractPlayerShopkeeper
 	public void loadDynamicState(ShopkeeperData shopkeeperData) throws InvalidDataException {
 		super.loadDynamicState(shopkeeperData);
 		this.loadOwner(shopkeeperData);
+		this.loadTeam(shopkeeperData);
 		this.loadContainer(shopkeeperData);
 		this.loadNotifyOnTrades(shopkeeperData);
 		this.loadForHire(shopkeeperData);
@@ -144,6 +145,7 @@ public abstract class AbstractPlayerShopkeeper
 	public void saveDynamicState(ShopkeeperData shopkeeperData, boolean saveAll) {
 		super.saveDynamicState(shopkeeperData, saveAll);
 		this.saveOwner(shopkeeperData);
+		this.saveTeam(shopkeeperData);
 		this.saveContainer(shopkeeperData);
 		this.saveNotifyOnTrades(shopkeeperData);
 		this.saveForHire(shopkeeperData);
@@ -279,7 +281,6 @@ public abstract class AbstractPlayerShopkeeper
 	}
 
 	// OWNER
-
 	public static final Property<UUID> OWNER_UNIQUE_ID = new BasicProperty<UUID>()
 			.dataKeyAccessor("owner uuid", UUIDSerializers.LENIENT)
 			.build();
@@ -378,6 +379,55 @@ public abstract class AbstractPlayerShopkeeper
 		return Bukkit.getPlayer(this.getOwnerUUID());
 	}
 
+	// TEAMS
+	private @Nullable UUID teamUUID = null;
+	public static final Property<@Nullable UUID> TEAM_UUID = new BasicProperty<@Nullable UUID>()
+			.dataKeyAccessor("team_uuid", UUIDSerializers.LENIENT)
+			.nullable()
+			.defaultValue(null)
+			.build();
+
+	private void loadTeam(ShopkeeperData shopkeeperData) throws InvalidDataException {
+		assert shopkeeperData != null;
+		this._setTeamUUID(shopkeeperData.get(TEAM_UUID));
+	}
+
+	private void saveTeam(ShopkeeperData shopkeeperData) {
+		assert shopkeeperData != null;
+		shopkeeperData.set(TEAM_UUID, teamUUID);
+	}
+	public boolean isTeamShop() {
+		return teamUUID != null;
+	}
+
+	public @Nullable UUID getTeamUUID() {
+		return teamUUID;
+	}
+
+	public void setTeamUUID(@Nullable UUID teamUUID) {
+		this._setTeamUUID(teamUUID);
+		this.markDirty();
+	}
+
+	public boolean isTeamMember(Player player) {
+
+		if (teamUUID == null) return false;
+
+		var plugin = SKShopkeepersPlugin.getInstance();
+		var teamSystem = plugin.getTeamSystem();
+		if (teamSystem == null) return false;
+
+		return teamSystem.getTeamManager()
+				.isTeamMember(player.getUniqueId(), teamUUID);
+	}
+
+	private void _setTeamUUID(@Nullable UUID teamUUID) {
+		this.teamUUID = teamUUID;
+	}
+
+	public boolean hasTeam() {
+		return teamUUID != null;
+	}
 	// TRADE NOTIFICATIONS
 
 	public static final Property<Boolean> NOTIFY_ON_TRADES = new BasicProperty<Boolean>()

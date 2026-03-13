@@ -95,4 +95,5 @@ public class PlayerShopEditorLayout extends ShopkeeperEditorLayout {
 			}
 		};
 	}
+
 }

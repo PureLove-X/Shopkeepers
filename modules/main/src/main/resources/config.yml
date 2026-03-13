@@ -523,6 +523,10 @@ shop-information-item: 'minecraft:paper'
 # Set this to AIR to disable the use of placeholder items.
 placeholder-item: 'minecraft:paper'
 
+# Whether to allow players to create shop teams
+enable-teams: true
+team-selection-item: "minecraft:spruce_door"
+
 # Whether to allow shop owners to close their shops.
 enable-closing-of-player-shops: true
 # When enable-closing-of-player-shops is disabled, this controls whether to automatically re-open

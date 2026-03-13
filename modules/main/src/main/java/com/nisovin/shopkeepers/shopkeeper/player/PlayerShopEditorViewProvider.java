@@ -45,31 +45,15 @@ public abstract class PlayerShopEditorViewProvider extends ShopkeeperEditorViewP
 
 		// Check the owner:
 		if (!this.getShopkeeper().isOwner(player)
-				&& !isTeamMember(player)
+				&& !this.getShopkeeper().isTeamMember(player)
 				&& !PermissionUtils.hasPermission(player, ShopkeepersPlugin.BYPASS_PERMISSION)) {
 			if (!silent) {
-				this.debugNotOpeningUI(player, "Player is not owning this shop.");
+				this.debugNotOpeningUI(player, "Player is not owner, team member, or bypass.");
 				TextUtils.sendMessage(player, Messages.notOwner);
 			}
 			return false;
 		}
 		return true;
-	}
-	private boolean isTeamMember(Player player) {
-
-		var plugin = com.nisovin.shopkeepers.SKShopkeepersPlugin.getInstance();
-		var teamSystem = plugin.getTeamSystem();
-
-		if (teamSystem == null) {
-			return false;
-		}
-
-		var teamManager = teamSystem.getTeamManager();
-
-		var owner = this.getShopkeeper().getOwnerUUID();
-		var playerId = player.getUniqueId();
-
-		return teamManager.shareTeam(playerId, owner);
 	}
 
 	@Override

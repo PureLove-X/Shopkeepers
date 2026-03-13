@@ -309,6 +309,8 @@ public class Settings extends Config {
 	public static ItemData shopOpenItem = new ItemData(Material.GREEN_BANNER);
 	public static ItemData shopClosedItem = new ItemData(Material.RED_BANNER);
 
+
+
 	public static ItemData nameItem = new ItemData(Material.NAME_TAG);
 
 	public static boolean enableAllEquipmentEditorSlots = false;

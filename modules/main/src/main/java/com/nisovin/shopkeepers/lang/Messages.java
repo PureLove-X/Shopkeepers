@@ -954,8 +954,60 @@ public class Messages extends Config {
 	public static Text commandDescriptionSnapshotRestore = Text.parse("Restores a specific shop snapshot.");
 	public static Text commandDescriptionEditVillager = Text.parse("Opens the editor for the target villager.");
 	public static Text commandDescriptionReplaceAllWithVanillaVillagers = Text.parse("Replaces all shopkeepers with vanilla villagers without AI.");
+	// TEAM MESSAGES
+	public static Text commandDescriptionTeam = Text.parse("Manages your shop team.");
+	public static Text commandDescriptionTeamCreate = Text.parse("Creates a new team.");
+	public static Text commandDescriptionTeamInvite = Text.parse("Invites a player to your team.");
+	public static Text commandDescriptionTeamAccept = Text.parse("Accepts a team invite.");
+	public static Text commandDescriptionTeamDeny = Text.parse("Declines a team invite.");
+	public static Text commandDescriptionTeamKick = Text.parse("Removes a player from your team.");
+	public static Text commandDescriptionTeamLeave = Text.parse("Leaves your current team.");
+	public static Text commandDescriptionTeamInfo = Text.parse("Shows information about your team.");
+	public static Text commandDescriptionTeamTransfer = Text.parse("Transfers team ownership.");
+	//creation
+	public static Text teamCreated = Text.parse("&aTeam created: &e{name}");
+	public static Text teamAlreadyExists = Text.parse("&cA team with that name already exists.");
+	public static Text teamAlreadyIn = Text.parse("&cYou are already in a team.");
+	public static Text alreadyOwnTeam = Text.parse("&cYou already own a team.");
+	public static Text teamNameRequired = Text.parse("&cYou must specify a team name.");
+	public static Text teamCannotInviteSelf = Text.parse("&cYou can't invite yourself to your own team.");
+	//invites
+	public static Text teamInviteSent = Text.parse("&aInvite sent to &e{player}&a.");
+	public static Text teamInviteReceived = Text.parse("&e{player}&a invited you to join team &e{name}&a.");
+	public static Text teamInviteAccepted = Text.parse("&e{player}&a joined the team.");
+	public static Text teamInviteDenied = Text.parse("&e{player}&c declined your team invite.");
+	public static Text noPendingInvite = Text.parse("&cYou do not have a pending team invite.");
+	public static Text teamInviteAlreadySent = Text.parse("&cThat player already has a pending invite to team &e{name}&c.");
+	public static Text teamInviteExpired = Text.parse("&cThat team invite has expired.");
+	public static final Text teamInviteDeniedSelf = Text.parse("team-invite-denied-self");
+	//Joining/leaving
+	public static Text teamJoined = Text.parse("&aYou joined team &e{name}&a.");
+	public static Text teamLeft = Text.parse("&eYou left the team.");
+	public static Text teamNotInTeam = Text.parse("&cYou are not in a team.");
+	public static Text teamNotFound = Text.parse("&cTeam '&e{name}&c' was not found.");
+	//kicking
+	public static Text teamPlayerKicked = Text.parse("&e{player}&c was removed from the team.");
+	public static Text teamKicked = Text.parse("&cYou were removed from the team.");
+	public static Text cannotKickOwner = Text.parse("&cYou cannot remove the team owner.");
+	public static Text cannotKickSelf = Text.parse("&cYou cannot remove yourself from the team.");
 
-	/////
+	//Ownership
+	public static Text teamOwnershipTransferred = Text.parse("&aTeam ownership transferred to &e{player}&a.");
+	public static Text teamNotOwner = Text.parse("&cYou must be the team owner to do this.");
+	//info
+	public static Text teamInfoHeader = Text.parse("&6Team: &e{name}");
+	public static Text teamInfoOwner = Text.parse("&7Owner: &e{owner}");
+	public static Text teamInfoMembers = Text.parse("&7Members: &e{members}");
+	//lookup
+	public static Text teamPlayerNotFound = Text.parse("&cPlayer not found.");
+	//List
+	public static Text commandDescriptionTeamList = Text.parse("Lists all teams.");
+	public static Text noTeamsExist = Text.parse("&cNo teams currently exist.");
+	public static Text teamListHeader = Text.parse("&6Teams:");
+	public static Text teamListEntry = Text.parse("&e- {name}");
+	public static Text teamSpecifyTeam = Text.parse("&cYou are in multiple teams. Please specify a team!");
+	//leave
+	public static Text cannotLeaveOwnTeam = Text.parse("&cYou cannot leave a team you own.");
 
 	private static final String LANG_FOLDER = "lang";
 	public static final String DEFAULT_LANGUAGE = "en-default";
