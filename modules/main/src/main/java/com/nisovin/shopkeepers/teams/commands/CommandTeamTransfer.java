@@ -1,4 +1,4 @@
-package com.nisovin.shopkeepers.commands.teams;
+package com.nisovin.shopkeepers.teams.commands;
 
 import com.nisovin.shopkeepers.commands.arguments.teams.TeamArgument;
 import org.bukkit.entity.Player;
@@ -6,53 +6,58 @@ import org.bukkit.entity.Player;
 import com.nisovin.shopkeepers.commands.lib.Command;
 import com.nisovin.shopkeepers.commands.lib.CommandException;
 import com.nisovin.shopkeepers.commands.lib.CommandInput;
-import com.nisovin.shopkeepers.commands.lib.arguments.StringArgument;
+import com.nisovin.shopkeepers.commands.lib.arguments.PlayerArgument;
 import com.nisovin.shopkeepers.commands.lib.context.CommandContextView;
 import com.nisovin.shopkeepers.lang.Messages;
 import com.nisovin.shopkeepers.teams.Team;
 import com.nisovin.shopkeepers.teams.TeamManager;
 import com.nisovin.shopkeepers.util.bukkit.TextUtils;
 
-class CommandTeamLeave extends Command {
+class CommandTeamTransfer extends Command {
 
     private static final String ARG_TEAM = "team";
+    private static final String ARG_PLAYER = "player";
 
     private final TeamManager teamManager;
 
-    CommandTeamLeave(TeamManager teamManager) {
-        super("leave");
+    CommandTeamTransfer(TeamManager teamManager) {
+        super("transfer");
 
         this.teamManager = teamManager;
 
-        this.setDescription(Messages.commandDescriptionTeamLeave);
+        this.setDescription(Messages.commandDescriptionTeamTransfer);
 
         this.addArgument(new TeamArgument(ARG_TEAM, teamManager));
+        this.addArgument(new PlayerArgument(ARG_PLAYER));
     }
 
     @Override
     protected void execute(CommandInput input, CommandContextView context) throws CommandException {
 
-        Player player = (Player) input.getSender();
-        if (!context.has(ARG_TEAM)) {
+        Player sender = (Player) input.getSender();
+        if (!context.has(ARG_PLAYER)) {
             sendHelp(input.getSender());
             return;
         }
-
         Team team = context.get(ARG_TEAM);
+        Player newOwner = context.get(ARG_PLAYER);
 
-        if (!team.isMember(player.getUniqueId())) {
-            TextUtils.sendMessage(player, Messages.teamNotInTeam);
+
+        if (!teamManager.isOwner(sender.getUniqueId(), team.getId())) {
+            TextUtils.sendMessage(sender, Messages.teamNotOwner);
             return;
         }
 
-        if (team.isOwner(player.getUniqueId())) {
-            TextUtils.sendMessage(player, Messages.cannotLeaveOwnTeam);
+        if (!team.isMember(newOwner.getUniqueId())) {
+            TextUtils.sendMessage(sender, Messages.teamPlayerNotFound);
             return;
         }
 
+        teamManager.transferOwnership(team.getId(), newOwner.getUniqueId());
 
-        teamManager.removeMember(team.getId(), player.getUniqueId());
-
-        TextUtils.sendMessage(player, Messages.teamLeft);
+        TextUtils.sendMessage(sender,
+                Messages.teamOwnershipTransferred,
+                "player", newOwner.getName()
+        );
     }
 }

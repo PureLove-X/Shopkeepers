@@ -1,5 +1,6 @@
 package com.nisovin.shopkeepers.shopkeeper.player;
 
+import com.nisovin.shopkeepers.teams.TeamSystem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -45,7 +46,7 @@ public abstract class PlayerShopEditorViewProvider extends ShopkeeperEditorViewP
 
 		// Check the owner:
 		if (!this.getShopkeeper().isOwner(player)
-				&& !this.getShopkeeper().isTeamMember(player)
+				&& !TeamSystem.get().isTeamMember(player, this.getShopkeeper())
 				&& !PermissionUtils.hasPermission(player, ShopkeepersPlugin.BYPASS_PERMISSION)) {
 			if (!silent) {
 				this.debugNotOpeningUI(player, "Player is not owner, team member, or bypass.");

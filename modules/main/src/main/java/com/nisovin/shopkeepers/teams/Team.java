@@ -40,7 +40,9 @@ public class Team {
         this.owner = newOwner;
         members.add(newOwner);
     }
-
+    public int size() {
+        return members.size();
+    }
     public Set<UUID> getMembers() {
         return Collections.unmodifiableSet(members);
     }

@@ -1,4 +1,4 @@
-package com.nisovin.shopkeepers.commands.teams;
+package com.nisovin.shopkeepers.teams.commands;
 
 import com.nisovin.shopkeepers.SKShopkeepersPlugin;
 import com.nisovin.shopkeepers.commands.Confirmations;

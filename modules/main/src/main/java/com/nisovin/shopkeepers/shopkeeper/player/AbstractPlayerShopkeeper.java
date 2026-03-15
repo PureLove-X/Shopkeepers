@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+import com.nisovin.shopkeepers.teams.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -136,6 +137,7 @@ public abstract class AbstractPlayerShopkeeper
 		super.loadDynamicState(shopkeeperData);
 		this.loadOwner(shopkeeperData);
 		this.loadTeam(shopkeeperData);
+        this.loadTeamMode(shopkeeperData);
 		this.loadContainer(shopkeeperData);
 		this.loadNotifyOnTrades(shopkeeperData);
 		this.loadForHire(shopkeeperData);
@@ -146,6 +148,7 @@ public abstract class AbstractPlayerShopkeeper
 		super.saveDynamicState(shopkeeperData, saveAll);
 		this.saveOwner(shopkeeperData);
 		this.saveTeam(shopkeeperData);
+        this.saveTeamMode(shopkeeperData);
 		this.saveContainer(shopkeeperData);
 		this.saveNotifyOnTrades(shopkeeperData);
 		this.saveForHire(shopkeeperData);
@@ -380,22 +383,49 @@ public abstract class AbstractPlayerShopkeeper
 	}
 
 	// TEAMS
+
 	private @Nullable UUID teamUUID = null;
+
 	public static final Property<@Nullable UUID> TEAM_UUID = new BasicProperty<@Nullable UUID>()
 			.dataKeyAccessor("team_uuid", UUIDSerializers.LENIENT)
 			.nullable()
 			.defaultValue(null)
 			.build();
 
+	private boolean teamMode = false;
+
+	public static final Property<Boolean> TEAM_MODE = new BasicProperty<Boolean>()
+			.dataKeyAccessor("team_mode", BooleanSerializers.LENIENT)
+			.defaultValue(false)
+			.omitIfDefault()
+			.build();
+
+
+/* =========================
+   LOAD / SAVE
+   ========================= */
+
 	private void loadTeam(ShopkeeperData shopkeeperData) throws InvalidDataException {
-		assert shopkeeperData != null;
-		this._setTeamUUID(shopkeeperData.get(TEAM_UUID));
+		this.teamUUID = shopkeeperData.get(TEAM_UUID);
 	}
 
 	private void saveTeam(ShopkeeperData shopkeeperData) {
-		assert shopkeeperData != null;
 		shopkeeperData.set(TEAM_UUID, teamUUID);
 	}
+
+	private void loadTeamMode(ShopkeeperData shopkeeperData) throws InvalidDataException {
+		this.teamMode = shopkeeperData.get(TEAM_MODE);
+	}
+
+	private void saveTeamMode(ShopkeeperData shopkeeperData) {
+		shopkeeperData.set(TEAM_MODE, teamMode);
+	}
+
+
+/* =========================
+   GETTERS
+   ========================= */
+
 	public boolean isTeamShop() {
 		return teamUUID != null;
 	}
@@ -405,28 +435,17 @@ public abstract class AbstractPlayerShopkeeper
 	}
 
 	public void setTeamUUID(@Nullable UUID teamUUID) {
-		this._setTeamUUID(teamUUID);
+		this.teamUUID = teamUUID;
 		this.markDirty();
 	}
 
-	public boolean isTeamMember(Player player) {
-
-		if (teamUUID == null) return false;
-
-		var plugin = SKShopkeepersPlugin.getInstance();
-		var teamSystem = plugin.getTeamSystem();
-		if (teamSystem == null) return false;
-
-		return teamSystem.getTeamManager()
-				.isTeamMember(player.getUniqueId(), teamUUID);
+	public boolean isTeamMode() {
+		return teamMode;
 	}
 
-	private void _setTeamUUID(@Nullable UUID teamUUID) {
-		this.teamUUID = teamUUID;
-	}
-
-	public boolean hasTeam() {
-		return teamUUID != null;
+	public void setTeamMode(boolean teamMode) {
+		this.teamMode = teamMode;
+		this.markDirty();
 	}
 	// TRADE NOTIFICATIONS
 

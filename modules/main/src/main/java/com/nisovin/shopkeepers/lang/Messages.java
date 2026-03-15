@@ -71,6 +71,13 @@ public class Messages extends Config {
 	public static List<String> buttonNextPageLore = c(Arrays.asList());
 	public static String buttonCurrentPage = c("&6Page {page} of {max_page}");
 	public static List<String> buttonCurrentPageLore = c(Arrays.asList());
+	public static String buttonTeamSelection = c("&aShop team");
+	public static List<String> buttonTeamSelectionLore = c(Arrays.asList(
+			"Current team:",
+			"&e{team}",
+			"",
+			"Click to change"
+	));
 
 	public static String buttonShopOpen = c("&aClose shop");
 	public static List<String> buttonShopOpenLore = c(Arrays.asList(

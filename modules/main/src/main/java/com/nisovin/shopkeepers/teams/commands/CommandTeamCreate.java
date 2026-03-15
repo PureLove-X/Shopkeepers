@@ -1,6 +1,4 @@
-package com.nisovin.shopkeepers.commands.teams;
-
-import java.util.List;
+package com.nisovin.shopkeepers.teams.commands;
 
 import com.nisovin.shopkeepers.commands.lib.arguments.StringArgument;
 import org.bukkit.entity.Player;
@@ -12,7 +10,6 @@ import com.nisovin.shopkeepers.commands.lib.context.CommandContextView;
 import com.nisovin.shopkeepers.lang.Messages;
 import com.nisovin.shopkeepers.teams.TeamManager;
 import com.nisovin.shopkeepers.util.bukkit.TextUtils;
-import org.eclipse.jdt.annotation.NonNull;
 
 class CommandTeamCreate extends Command {
 

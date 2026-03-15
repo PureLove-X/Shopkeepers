@@ -17,17 +17,17 @@ debug: false
 # - 'shopkeeper-activation': Enables debugging output related to shopkeeper
 #    activation.
 # - 'regular-tick-activities': Enables debug output for regular shopkeeper
-#    activities and behaviors that would otherwise cause debug spam when being
-#    enabled by default. This includes for example the activity of teleporting
+#    activities and behaviours that would otherwise cause debug spam when being
+#    enabled by default. This includes, for example, the activity of teleporting
 #    shopkeepers back into place, updating their location when they are mobile
-#    and moved around, or behaviors such as the playing of sound effects.
+#    and moved around, or behaviours such as the playing of sound effects.
 # - 'visualize-shopkeeper-ticks': Visualizes the ticking activities of
 #    shopkeepers in-game.
 # - 'commands': Enables additional commands related debugging output.
 # - 'owner-name-updates': Logs information when updating stored shop owner
 #    names.
 # - 'item-migrations': Logs whenever a shopkeeper performs item migrations
-#    (e.g. for trade offers).
+#    (e.g., for trade offers).
 # - 'item-updates': Logs whenever items are updated via the UpdateItemEvent.
 # - 'empty-trades': Logs detailed item information for the selected trade and
 #    the items in the input slots whenever a player clicks an empty trading
@@ -37,7 +37,7 @@ debug: false
 # - 'unsafe-teleports': Logs additional debug output whenever a teleport is
 #    considered unsafe.
 debug-options: []
-# Whether to report anonymous usage statistics to https://bStats.org
+# Whether to report anonymous usage statistics to https://bStats.org,
 # All reported information can be found here:
 # https://bstats.org/plugin/bukkit/Shopkeepers
 enable-metrics: true
@@ -55,7 +55,7 @@ language: en-default
 # *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
 
 # Whether to immediately save all shopkeeper data whenever a shopkeeper is
-# edited. If disabled, the shopkeeper data is saved in 5 minute intervals and
+# edited. If disabled, the shopkeeper data is saved in 5-minute intervals and
 # when the plugin is shut down.
 # If you have a large server with many players and/or many shopkeepers, it
 # might be a good idea to disable this for performance reasons.
@@ -88,8 +88,8 @@ bypass-spawn-blocking: true
 # This is disabled by default, because automatically deleting shopkeepers is
 # potentially risky: There might be ways for players to abuse this by somehow
 # causing shopkeepers of other players to fail to spawn. Or there might be a
-# bug in the plugin or server that occassionally prevents a shopkeeper from
-# spawning, or sporadic non-criticial reasons for why a shopkeeper failed to
+# bug in the plugin or server that occasionally prevents a shopkeeper from
+# spawning, or sporadic non-critical reasons for why a shopkeeper failed to
 # spawned (e.g. some other plugin interfering, or the world not being loaded
 # currently).
 # It is therefore recommended to keep this disabled and instead periodically
@@ -110,7 +110,7 @@ enable-world-guard-restrictions: false
 # 'allow-shop' flag is set, but nowhere else. However, players will still
 # require container access to set up shops. And in case they can't place
 # containers in the affected region, shop containers need to be pre-setup by
-# someone else and the require-container-recently-placed setting needs to be
+# someone else, and the require-container-recently-placed setting needs to be
 # disabled.
 require-world-guard-allow-shop-flag: false
 # Whether to register the allow-shop flag with WorldGuard (if no other plugin
@@ -162,7 +162,7 @@ shop-creation-item:
 # the future without breaking any existing shop creation items in the world
 # (e.g. in chests, player inventories, trades, third-party plugin data, etc.).
 # By default, this and 'identify-shop-creation-item-by-tag' are enabled for new
-# configurations, but disabled for backwards compatibility reasons for servers
+# configurations but disabled for backwards compatibility reasons for servers
 # that migrated from a config-version of 5 or lower.
 add-shop-creation-item-tag: true
 # Whether to identify the shop creation item by the custom NBT tag added via
@@ -475,8 +475,8 @@ allow-renaming-of-player-npc-shops: false
 # Editor Menu
 # *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
 
-# Placeholder items to use inside the editors for empty trades, and for empty
-# slots of partially set up trades. The display name and lore of these items
+# Placeholder items to use inside the editors for empty trades and for empty
+# slots of partially setup trades. The display name and lore of these items
 # (unless they are set to AIR by default) are specified inside the language
 # file.
 # In combination with their display name and lore, these items must not match
@@ -544,15 +544,15 @@ force-open-player-shops: true
 shop-open-item: 'minecraft:green_banner'
 shop-closed-item: 'minecraft:red_banner'
 
-# The item used for the set-name button, and the naming item (if enabled).
+# The item used for the set-name button and the naming item (if enabled).
 name-item: 'minecraft:name_tag'
 
 # Whether to enable the equipment editor for all mobs and all equipment slots.
 # By default, the equipment can only be edited for mobs and slots that are known, at least for
-# certain items, to visually affect the mob. Enabling this setting can for example be useful for
-# testing purposes, e.g. when new mobs are added to the game, or when existing mobs start to support
+# certain items, to visually affect the mob. Enabling this setting can, for example, be useful for
+# testing purposes, e.g. when new mobs are added to the game or when existing mobs start to support
 # additional equipment slots.
-# Certain shop objects, such as for example horses (armor) or llamas (carpet), provide dedicated
+# Certain shop objects, such as, for example, horses (armour) or llamas (carpet), provide dedicated
 # editor buttons to edit certain equipment. This setting also enables the equipment editor for these
 # mobs and slots. Any non-empty equipment specified via the equipment editor overrides the equipment
 # of these dedicated editor buttons.
@@ -741,7 +741,7 @@ trade-log-storage: 'DISABLED'
 # players trade by shift clicking the result slot, they can trigger up to 64
 # individual trades at once with a single click. And even when not shift
 # clicking, they can quickly trigger a considerable number of trades.
-# In order to represent the logged trades more compactly, we merge successive
+# To represent the logged trades more compactly, we merge successive
 # trades that happen over a certain period of time if they involve the same
 # player, the same shopkeeper, and the same items. This setting specifies the
 # maximum duration in ticks during which successive equal trades are merged.

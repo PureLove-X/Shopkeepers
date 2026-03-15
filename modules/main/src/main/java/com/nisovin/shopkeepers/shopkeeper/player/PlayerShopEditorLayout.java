@@ -2,6 +2,10 @@ package com.nisovin.shopkeepers.shopkeeper.player;
 
 import java.util.List;
 
+import com.nisovin.shopkeepers.teams.ui.TeamUIType;
+import com.nisovin.shopkeepers.teams.ui.TeamViewProvider;
+import com.nisovin.shopkeepers.ui.lib.UISessionManager;
+import com.nisovin.shopkeepers.ui.lib.UIState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -36,6 +40,7 @@ public class PlayerShopEditorLayout extends ShopkeeperEditorLayout {
 
 		this.addButtonOrIgnore(this.createContainerButton());
 		this.addButtonOrIgnore(this.createTradeNotificationsButton());
+		this.addButtonOrIgnore(this.createTeamSelectionButton());
 	}
 
 	protected @Nullable Button createContainerButton() {
@@ -95,5 +100,45 @@ public class PlayerShopEditorLayout extends ShopkeeperEditorLayout {
 			}
 		};
 	}
+
+	protected @Nullable Button createTeamSelectionButton() {
+
+		if (!Settings.enableTeams) {
+			return null;
+		}
+
+		return new ActionButton() {
+
+			@Override
+			public @Nullable ItemStack getIcon(EditorView editorView) {
+				return DerivedSettings.teamSelectionButtonItem.createItemStack();
+			}
+
+			@Override
+			protected boolean runAction(EditorView editorView, InventoryClickEvent clickEvent) {
+
+				Player player = editorView.getPlayer();
+
+				editorView.closeDelayedAndRunTask(() -> {
+
+					TeamViewProvider provider = new TeamViewProvider(
+							TeamUIType.INSTANCE,
+							editorView.getContext()
+					);
+
+					UISessionManager.getInstance().requestUI(
+							provider,
+							player,
+							UIState.EMPTY
+					);
+
+				});
+
+				return true;
+			}
+		};
+	}
+
+
 
 }

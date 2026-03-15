@@ -1,4 +1,4 @@
-package com.nisovin.shopkeepers.commands.teams;
+package com.nisovin.shopkeepers.teams.commands;
 
 import com.nisovin.shopkeepers.commands.arguments.teams.TeamArgument;
 import com.nisovin.shopkeepers.commands.lib.Command;

@@ -1,6 +1,6 @@
 package com.nisovin.shopkeepers.commands;
 
-import com.nisovin.shopkeepers.commands.teams.TeamCommand;
+import com.nisovin.shopkeepers.teams.commands.TeamCommand;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.Nullable;
 

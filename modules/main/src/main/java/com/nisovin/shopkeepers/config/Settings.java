@@ -304,6 +304,9 @@ public class Settings extends Config {
 
 	public static ItemData placeholderItem = new ItemData(Material.PAPER);
 
+	public static boolean enableTeams = true;
+	public static ItemData teamSelectionItem = new ItemData(Material.SPRUCE_DOOR);
+
 	public static boolean enableClosingOfPlayerShops = true;
 	public static boolean forceOpenPlayerShops = true;
 	public static ItemData shopOpenItem = new ItemData(Material.GREEN_BANNER);
@@ -430,6 +433,7 @@ public class Settings extends Config {
 		public static ItemData namingItemData = Unsafe.uncheckedNull();
 
 		// Button items:
+		public static ItemData teamSelectionButtonItem = Unsafe.uncheckedNull();
 		public static ItemData shopOpenButtonItem = Unsafe.uncheckedNull();
 		public static ItemData shopClosedButtonItem = Unsafe.uncheckedNull();
 		public static ItemData nameButtonItem = Unsafe.uncheckedNull();
@@ -627,6 +631,12 @@ public class Settings extends Config {
 			));
 
 			// Button items:
+			teamSelectionButtonItem = new ItemData(
+					teamSelectionItem,
+					Messages.buttonTeamSelection,
+					Messages.buttonTeamSelectionLore
+			);
+
 			shopOpenButtonItem = new ItemData(
 					shopOpenItem,
 					Messages.buttonShopOpen,

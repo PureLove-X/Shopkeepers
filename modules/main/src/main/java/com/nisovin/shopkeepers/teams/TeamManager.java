@@ -1,5 +1,9 @@
 package com.nisovin.shopkeepers.teams;
 
+import com.nisovin.shopkeepers.SKShopkeepersPlugin;
+import com.nisovin.shopkeepers.shopkeeper.player.AbstractPlayerShopkeeper;
+import org.bukkit.entity.Player;
+
 import java.util.*;
 
 public class TeamManager {
@@ -9,7 +13,11 @@ public class TeamManager {
     private final Map<UUID, Set<UUID>> memberTeams = new HashMap<>();
     private final Map<UUID, Map<UUID, TeamInvite>> invites = new HashMap<>();
     private static final long INVITE_TIMEOUT = 5 * 60 * 1000; // 5 minutes
-
+    private TeamManager getTeamManager() {
+        return SKShopkeepersPlugin.getInstance()
+                .getTeamSystem()
+                .getTeamManager();
+    }
     public Team createTeam(String name, UUID owner) {
 
         if (ownerTeams.containsKey(owner)) {
@@ -27,6 +35,7 @@ public class TeamManager {
 
         return team;
     }
+
     public Team loadTeam(UUID id, String name, UUID owner) {
 
         Team team = new Team(id, name, owner);
@@ -57,7 +66,7 @@ public class TeamManager {
     public void deleteTeam(UUID teamId) {
 
         Team team = teams.remove(teamId);
-
+        invites.values().forEach(map -> map.remove(teamId));
         if (team != null) {
 
             ownerTeams.remove(team.getOwner());
@@ -79,11 +88,11 @@ public class TeamManager {
 
     public boolean isTeamMember(UUID player, UUID teamId) {
 
-        Team team = getTeam(teamId);
+        Set<UUID> teams = memberTeams.get(player);
 
-        if (team == null) return false;
+        if (teams == null) return false;
 
-        return team.isMember(player);
+        return teams.contains(teamId);
     }
 
     public void transferOwnership(UUID teamId, UUID newOwner) {
@@ -109,26 +118,9 @@ public class TeamManager {
         return teams.get(teamId);
     }
 
-    public Team getTeamByMember(UUID member) {
-
-        Set<UUID> teamIds = memberTeams.get(member);
-
-        if (teamIds == null || teamIds.isEmpty()) {
-            return null;
-        }
-
-        // If players only belong to one team, return the first
-        UUID id = teamIds.iterator().next();
-
-        return teams.get(id);
-    }
 
     public boolean isInAnyTeam(UUID player) {
-        if (ownerTeams.containsKey(player)) {
-            return true;
-        }
-
-        return getTeamByMember(player) != null;
+        return memberTeams.containsKey(player);
     }
 
     public void addMember(UUID teamId, UUID player) {
@@ -210,11 +202,7 @@ public class TeamManager {
 
         if (playerInvites == null) return;
 
-        long now = System.currentTimeMillis();
-
-        playerInvites.entrySet().removeIf(entry ->
-                now - entry.getValue().getTimestamp() > INVITE_TIMEOUT
-        );
+        playerInvites.entrySet().removeIf(entry -> isInviteExpired(entry.getValue()));
 
         if (playerInvites.isEmpty()) {
             invites.remove(player);
@@ -306,6 +294,65 @@ public class TeamManager {
 
         return expired;
     }
+    private boolean isInviteExpired(TeamInvite invite) {
 
+        long age = System.currentTimeMillis() - invite.getTimestamp();
 
+        return age > INVITE_TIMEOUT;
+    }
+    /*
+     * ---------------------------------------
+     * Shop-aware helper methods
+     * ---------------------------------------
+     */
+
+    public boolean hasTeam(AbstractPlayerShopkeeper shopkeeper) {
+        return shopkeeper.getTeamUUID() != null;
+    }
+
+    public Team getTeam(AbstractPlayerShopkeeper shopkeeper) {
+
+        UUID teamId = shopkeeper.getTeamUUID();
+        if (teamId == null) return null;
+
+        return getTeam(teamId);
+    }
+
+    public boolean isTeamMember(UUID playerUUID, AbstractPlayerShopkeeper shopkeeper) {
+
+        UUID teamId = shopkeeper.getTeamUUID();
+        if (teamId == null) return false;
+
+        return isTeamMember(playerUUID, teamId);
+    }
+
+    public boolean isTeamMember(Player player, AbstractPlayerShopkeeper shopkeeper) {
+        return isTeamMember(player.getUniqueId(), shopkeeper);
+    }
+
+    public boolean isTeamOwner(UUID playerUUID, AbstractPlayerShopkeeper shopkeeper) {
+
+        UUID teamId = shopkeeper.getTeamUUID();
+        if (teamId == null) return false;
+
+        return isOwner(playerUUID, teamId);
+    }
+
+    public boolean canAccessShop(Player player, AbstractPlayerShopkeeper shopkeeper) {
+
+        if (shopkeeper.isOwner(player)) {
+            return true;
+        }
+
+        if (!shopkeeper.isTeamMode()) {
+            return false;
+        }
+
+        UUID teamId = shopkeeper.getTeamUUID();
+        if (teamId == null) {
+            return false;
+        }
+
+        return isTeamMember(player.getUniqueId(), teamId);
+    }
 }

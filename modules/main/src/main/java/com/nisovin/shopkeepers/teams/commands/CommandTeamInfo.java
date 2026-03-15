@@ -1,4 +1,4 @@
-package com.nisovin.shopkeepers.commands.teams;
+package com.nisovin.shopkeepers.teams.commands;
 
 import com.nisovin.shopkeepers.commands.arguments.teams.TeamArgument;
 import org.bukkit.Bukkit;
@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import com.nisovin.shopkeepers.commands.lib.Command;
 import com.nisovin.shopkeepers.commands.lib.CommandException;
 import com.nisovin.shopkeepers.commands.lib.CommandInput;
-import com.nisovin.shopkeepers.commands.lib.arguments.StringArgument;
 import com.nisovin.shopkeepers.commands.lib.context.CommandContextView;
 import com.nisovin.shopkeepers.lang.Messages;
 import com.nisovin.shopkeepers.teams.Team;
